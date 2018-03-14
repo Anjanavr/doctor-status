@@ -1,0 +1,13 @@
+table {
+    background-color: #f7f7f7;
+    border-collapse: collapse;
+    text-align: left;
+    margin: 0 auto;
+}
+tr {
+    border: 1px solid bisque;
+}
+th, td {
+    border-right: 1px solid bisque;
+    padding: 5px;
+}
