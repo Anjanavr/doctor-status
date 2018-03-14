@@ -1,29 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../services/shared.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
-  providers: [SharedService]
+  styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-
+  listObservable: Observable<any[]>;
   doctorsList: any;
-  filteredDoctorsList: any;
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
-    this.sharedService.fetchDoctorsList()
-      .subscribe(data => {
-        this.doctorsList = Object.values(data);
-        this.filteredDoctorsList = Object.values(data);
-        console.log(this.doctorsList);
-      },
-      error => {
-        alert(error.message);
-      });
+    this.listObservable = this.getDoctorsList();
+  }
+
+  getDoctorsList() {
+    return this.db.list('/doctors').valueChanges();
   }
 
 }
