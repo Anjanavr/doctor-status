@@ -12,6 +12,7 @@ export class LoginService {
 
   constructor (private http: HttpClient, private router: Router) {}
   logIn(user) {
+    this.isLoggedIn = true;
     return this.http.get('../assets/data/user-details.json');
   }
 

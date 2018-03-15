@@ -11,7 +11,9 @@ footer {
     padding-bottom: 15px;
 }
 h1 {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 60%;
+    text-align: left;
 }
 .content {
     background-color: #f7f7f7;
@@ -19,4 +21,11 @@ h1 {
     min-height: calc(100% - 137px);
     padding: 30px;
     text-align: center;
+}
+.logout-wrap {
+    float: right;
+}
+.logout-wrap img {
+    width: 40px;
+    height: 40px;
 }

@@ -1,11 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <header>
   <h1>
-    Doctor Status
+    DocWhere
+    <span class="logout-wrap" *ngIf="currentUrl !== '/login'">
+      <img (click)="logout()" title="Logout" alt="Logout" src="../assets/images/logout.png">
+    </span>
   </h1>
 </header>
 <div class="content">
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="changeOfRoutes()"></router-outlet>
 </div>
 <footer>
   © 2018 All Rights Reserved. Privacy & Cookies Policy

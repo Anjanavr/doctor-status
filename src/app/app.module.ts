@@ -7,8 +7,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-
-
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { LoginComponent } from './login/login.component';
@@ -16,7 +14,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login',  component: LoginComponent },
-  { path: 'dashboard',  component: ListComponent },
+  { path: 'dashboard',  component: ListComponent},
 ];
 
 @NgModule({
@@ -36,7 +34,8 @@ const routes: Routes = [
     NgbModule.forRoot(),
     NgbPaginationModule.forRoot()
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loginBtnDisabled: boolean;
   private pwdCheck: boolean;
   public errorMessage: string;
+  isLoggedIn: any;
 
   constructor(private loginService: LoginService, private router: Router) {
     this.submitted = false;
@@ -30,7 +31,6 @@ export class LoginComponent implements OnInit {
       ]),
       password: new FormControl('', [Validators.required])
     });
-
   }
   validateUser(user, isValid: boolean) {
     this.submitted = true; // set form submit to true
@@ -39,8 +39,6 @@ export class LoginComponent implements OnInit {
         const regUser = data['user'];
         if (regUser.email === user.email && regUser.password === user.password) {
           this.router.navigate(['/dashboard']);
-          this.loginService.isLoggedIn = true;
-          this.loginService.loggedInUser = user;
         } else {
           this.errorMessage = 'Invalid Credentials';
           this.router.navigate(['']);
