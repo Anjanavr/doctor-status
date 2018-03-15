@@ -7,3 +7,7 @@ body {
     font-family: 'sans-serif';
     font-size: 14px;
 }
+ul.pagination {
+    float: right;
+    max-width: 50%;
+}

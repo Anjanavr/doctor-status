@@ -9,7 +9,11 @@ export const environment = {
     apiKey: 'AIzaSyAuYcocaq1YzKv3nzwIzYBHvjOEjN5QkJY',
     authDomain: 'docstatusandroid.firebaseapp.com',
     databaseURL: 'https://docstatusandroid.firebaseio.com',
-    projectId: 'strivefardev',
+    projectId: 'docstatusandroid',
     storageBucket: 'docstatusandroid.appspot.com'
+  },
+  algoliaConfig: {
+    appKey: 'V7K7DR01T2',
+    searchKey: '57aec6622f4add625c9ef6f5bac7acd5'
   }
 };

@@ -1,0 +1,28 @@
+<div class="left">
+  <img src="../../assets/images/slider_1.png">
+</div>
+<form id="login-form" class="smart-form client-form input-tooltips" [formGroup]="loginForm" novalidate (ngSubmit)="validateUser(loginForm.value, loginForm.valid)">
+  <h1>
+    Sign In
+  </h1>
+  <fieldset>
+    <section>
+      <label class="label">E-mail</label>
+      <div [ngClass]="{'input': true, 'state-error':loginForm.controls.email.errors && submitted}">
+        <input type="email" name="email" formControlName="email" required (keyup)="clearErrorMessage()">
+      </div>
+      <em for="email" *ngIf="loginForm.controls.email.errors?.required && submitted" class="invalid">Please enter your email address</em>
+      <em for="email" *ngIf="loginForm.controls.email.errors?.pattern && submitted" class="invalid">Please enter a valid email address</em>
+    </section>
+    <section>
+      <label class="label">Password</label>
+      <div [ngClass]="{'input': true, 'state-error':loginForm.controls.password.errors && submitted}">
+        <input type="password" id="loginPwd" name="password" formControlName="password" required (keyup)="clearErrorMessage()">
+      </div>
+      <em for="password" *ngIf="loginForm.controls.password.errors?.required && submitted" class="invalid">Please enter your password</em>
+      <em for="password" *ngIf="loginForm.controls.password.errors?.pattern && submitted" class="invalid">Please enter a valid password</em>
+      <em *ngIf="errorMessage" class="invalid">{{errorMessage}}</em>
+    </section>
+  </fieldset>
+  <button type="submit" class="btn primary-btn" [attr.disabled]="loginBtnDisabled?'':null">Sign in</button>
+</form>

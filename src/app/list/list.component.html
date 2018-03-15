@@ -1,16 +1,37 @@
+<div class="search-wrap">
+  <input type="text" [(ngModel)]="searchParam" placeholder="Search" (keyup)="filterList()">
+</div>
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Status</th>
       <th>Comments</th>
+      <th>Last Updated</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of listObservable | async">
-      <td>{{item.name}}</td>
+    <tr>
+      <td style="text-align:center;" colspan="4" *ngIf="loading">
+        <img height="20" width="20" src="../../assets/images/loader.gif">
+      </td>
+      <td style="text-align:center;" colspan="4" *ngIf="!doctorsList.length && !loading">
+        No records found
+      </td>
+    </tr>
+    <tr *ngFor="let item of doctorsList">
+      <td>
+        <img [src]="item.profileImageUrl" width="30" height="30">
+        {{item.name}}
+      </td>
       <td>{{item.currentStatus}}</td>
-      <td>{{item.comments}}</td>
+      <td>{{item.comment}}</td>
+      <td>{{item.updatedAt}}</td>
     </tr>
   </tbody>
 </table>
+<div class="clearfix" style="margin: 12px 0;" *ngIf="filteredList.length > pageSize">
+  <span>{{startIndex + 1}} - {{endIndex}} of {{totalRecords}}</span>
+  <ngb-pagination [collectionSize]="totalRecords" [(page)]="currentPage" [pageSize]="pageSize" [maxSize]="2" [rotate]="true" (pageChange)="nextPage($event)"></ngb-pagination>
+</div>
+
