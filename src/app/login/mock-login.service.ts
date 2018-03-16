@@ -16,6 +16,14 @@ export class LoginService {
     return this.http.get('../assets/data/user-details.json');
   }
 
+  setUserLoggedIn() {
+    this.isLoggedIn = true;
+  }
+
+  getUserLoggedIn() {
+    return this.isLoggedIn;
+  }
+
   logOut() {
     this.isLoggedIn = false;
     this.loggedInUser = {};

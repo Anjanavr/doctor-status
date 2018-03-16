@@ -4,18 +4,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { RouterModule, Routes } from '@angular/router';
-import { environment } from '../environments/environment';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { LoginComponent } from './login/login.component';
 
-const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login',  component: LoginComponent },
-  { path: 'dashboard',  component: ListComponent},
-];
+import { LoginService } from './login/mock-login.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -30,11 +28,13 @@ const routes: Routes = [
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     NgbModule.forRoot(),
     NgbPaginationModule.forRoot()
   ],
   providers: [
+     LoginService,
+     AuthGuard
   ],
   bootstrap: [AppComponent]
 })

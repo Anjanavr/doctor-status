@@ -6,23 +6,16 @@ import { LoginService } from './mock-login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [ LoginService ]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup; // our model driven form
   public submitted: boolean; // keep track on whether form is submitted
-  private validCredentials: boolean;
-  loginBtnDisabled: boolean;
-  private pwdCheck: boolean;
   public errorMessage: string;
-  isLoggedIn: any;
 
   constructor(private loginService: LoginService, private router: Router) {
     this.submitted = false;
-    this.validCredentials = false;
-    this.pwdCheck = false;
   }
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -38,6 +31,7 @@ export class LoginComponent implements OnInit {
       this.loginService.logIn(user).subscribe(data => {
         const regUser = data['user'];
         if (regUser.email === user.email && regUser.password === user.password) {
+          this.loginService.setUserLoggedIn();
           this.router.navigate(['/dashboard']);
         } else {
           this.errorMessage = 'Invalid Credentials';
