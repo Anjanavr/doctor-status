@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AngularFireDatabase, snapshotChanges } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list',
@@ -32,7 +34,7 @@ export class ListComponent implements OnInit {
     this.listObservable = this.getDoctorsList();
     this.getDoctorsList()
       .subscribe(snapshot => {
-        this.initialList = snapshot;
+        this.initialList = this.sortByName(snapshot, 'name');
         this.totalRecords = this.initialList.length;
         this.filteredList = [...this.initialList];
         this.totalPages = Math.ceil(this.totalRecords / this.pageSize);
@@ -45,9 +47,17 @@ export class ListComponent implements OnInit {
     return this.db.list('/doctors').valueChanges();
   }
 
+  sortByName(array, key) {
+    return array.sort((a, b) => {
+        let x = a[key]; 
+        let y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+  }
+
   filterList() {
     if (this.searchParam !== '') {
-      this.filteredList = this.initialList.filter(each => each.name.toLowerCase().indexOf(this.searchParam.toLowerCase()) > -1);
+      this.filteredList = this.initialList.filter(each => (each.name.toLowerCase().indexOf(this.searchParam.toLowerCase()) > -1) || (each.department.toLowerCase().indexOf(this.searchParam.toLowerCase()) > -1));
     } else {
       this.filteredList = [...this.initialList];
     }

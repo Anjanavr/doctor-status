@@ -1,10 +1,11 @@
 <div class="search-wrap">
-  <input type="text" [(ngModel)]="searchParam" placeholder="Search name" (keyup)="filterList()">
+  <input type="text" [(ngModel)]="searchParam" placeholder="Search..." (keyup)="filterList()">
 </div>
 <table>
   <thead>
     <tr>
       <th>Name</th>
+      <th>Department</th>
       <th>Status</th>
       <th>Comments</th>
       <th>Last Updated</th>
@@ -24,9 +25,10 @@
         <img [src]="item.profileImageUrl" width="30" height="30">
         {{item.name}}
       </td>
+      <td>{{item.department}}</td>
       <td>{{item.currentStatus}}</td>
       <td>{{item.comment}}</td>
-      <td>{{item.updatedAt}}</td>
+      <td>{{item.updatedAt | date : 'hh:mm a'}}</td>
     </tr>
   </tbody>
 </table>
